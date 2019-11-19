@@ -25,12 +25,6 @@ void ColTransEncryptor::Encrypt(const std::string &raw, std::string &encrypted) 
     showInTableForm(arr);
     getCipherNumericOrder();
 
-
-    std::cout << "Cipher letter order:" << std::endl;
-    for (auto i : m_ColOrder)
-        std::cout << i << " ";
-    std::cout << std::endl;
-
     std::cout << m_cipherString.length() << std::endl;
     for (auto i : m_ColOrder) {
         for (int j = 0; j < arr.size(); j += m_cipherString.length()) {
@@ -44,7 +38,6 @@ void ColTransEncryptor::Encrypt(const std::string &raw, std::string &encrypted) 
 
 void ColTransEncryptor::Decrypt(const std::string &encrypted, std::string &raw) {
     getCipherNumericOrder();
-
 
     std::vector<char> arr(encrypted.size());
 
@@ -61,17 +54,6 @@ void ColTransEncryptor::Decrypt(const std::string &encrypted, std::string &raw) 
     }
     vec.push_back(tmp);
 
-    for (auto i:vec) {
-        for (auto j:i) {
-            std::cout << (char) j << " ";
-        }
-        std::cout << std::endl;
-    }
-
-    std::cout << "Cipher letter order:" << std::endl;
-    for (auto i : m_ColOrder)
-        std::cout << i << " ";
-    std::cout << std::endl;
     std::vector<std::vector<int>> r(m_ColOrder.size());
     
     int j = 0;
@@ -79,14 +61,6 @@ void ColTransEncryptor::Decrypt(const std::string &encrypted, std::string &raw) 
         r.at(i) = vec[j];
         j++;
     }
-
-    for (auto i:r) {
-        for (auto j:i) {
-            std::cout << (char) j << " ";
-        }
-        std::cout << std::endl;
-    }
-
 
     for (int i = 0; i < r.at(0).size(); i++) {
         for (j = 0; j < r.size(); j++) {

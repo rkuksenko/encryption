@@ -89,7 +89,6 @@ void BasicFileEncryptor::saveResultToFile(const std::string &filename) {
     }
 }
 
-
 void BasicFileEncryptor::saveToFilePrompt() {
     std::cout << "Save result to file (y/n)?:";
     char choice = -1;
@@ -100,6 +99,7 @@ void BasicFileEncryptor::saveToFilePrompt() {
 
         if (choice == 'n') {
             std::cout << "Exiting.." << std::endl;
+            exit(0);
         } else if (choice == 'y') {
             std::cout << "Input result filename: ";
             std::string filename;
