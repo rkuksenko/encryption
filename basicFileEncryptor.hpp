@@ -1,17 +1,23 @@
+#pragma once
 #include <string>
-#include "RomanEncryptor.hpp"
+#include <memory>
+
+class BasicEncryptor;
 
 class BasicFileEncryptor {
 public:
-    void encrypt();
-    void showInitialContent();
-    void showEncryptedContent();
-    void loadFromFile(const std::string &filename);
-    void saveToFile(const std::string &filename);
+    BasicFileEncryptor(std::unique_ptr<BasicEncryptor> encryptor);
+    void Run();
 
 private:
-    std::string m_initBuffer;
-    std::string m_encryptedBuffer;
+    void loadFromFile(const std::string &filename);
+    void saveResultToFile(const std::string &filename);
+    void saveToFilePrompt();
+    bool updateIsContinue();
 
-    RomanEncryptor m_rEncryptor;
+    std::string m_initBuffer;
+    std::string m_resultBuffer;
+    bool m_isContinue;
+
+    std::unique_ptr<BasicEncryptor> m_rEncryptor;
 };
