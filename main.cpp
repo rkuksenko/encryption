@@ -4,6 +4,7 @@
 #include "basicFileEncryptor.hpp"
 #include "Encryptors/BasicEncryptor.hpp"
 
+#include "Encryptors/lab5/XorCaesarEncryptor.hpp"
 #include "Encryptors/lab4/ColTransEncryptor.hpp"
 #include "Encryptors/lab3/RSAEncryption.hpp"
 #include "Encryptors/lab2/Rot13Encryptor.hpp"
@@ -20,6 +21,7 @@ int main(int argc, char** argv) {
                     << "2. Rot13 Encryption (LaboratoryWork#2)" << std::endl
                     << "3. RSAEncryption Encryption (LaboratoryWork#3)" << std::endl
                     << "4. Columnar transposition encryption (LaboratoryWork#4)" << std::endl
+                    << "5. Xor \"Caesar\" Encryptor (LaboratoryWork#5)" << std::endl
                     << "0. Exit" << std::endl;
         char choice = -1;
         std::cin >> choice;
@@ -60,6 +62,21 @@ int main(int argc, char** argv) {
             } while(!isCipherWordCorrect);
 
             encryptor = std::make_unique<ColTransEncryptor>(cipherWord);
+        } else if (choice == '5') {
+            bool isCipherWordCorrect = true;
+            std::string cipherWord;
+            do {
+                isCipherWordCorrect = true;
+                std::cout << "Generate cipher word (up to 6 symbols): ";
+                std::cin >> cipherWord;
+
+                if (cipherWord.length() > 6) {
+                    std::cout << "Please, use maximum 6-symbol word. Try again" << std::endl;
+                    isCipherWordCorrect = false;
+                }
+            } while(!isCipherWordCorrect);
+
+            encryptor = std::make_unique<XorCaesarEncryptor>(cipherWord);
         } else {
             std::cout << "Wrong input! Please, try again" << std::endl;
             while (std::cin.get() != '\n');
