@@ -10,6 +10,7 @@ ColTransEncryptor::ColTransEncryptor(const std::string &cipherString) : m_cipher
 
 void ColTransEncryptor::Encrypt(const std::string &raw, std::string &encrypted) {
     std::vector<char> arr;
+    m_ColOrder.clear();
     for (int i = 0; i < raw.length(); i++) {
         arr.push_back(raw[i]);
     }
@@ -37,6 +38,7 @@ void ColTransEncryptor::Encrypt(const std::string &raw, std::string &encrypted) 
 
 
 void ColTransEncryptor::Decrypt(const std::string &encrypted, std::string &raw) {
+    m_ColOrder.clear();
     getCipherNumericOrder();
 
     std::vector<char> arr(encrypted.size());
